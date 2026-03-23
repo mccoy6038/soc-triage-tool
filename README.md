@@ -1,44 +1,33 @@
-\# SOC Triage Tool
+# SOC Triage Tool
 
+Lightweight Python tool for rapid SOC triage and IP enrichment using threat intelligence sources (AbuseIPDB, geolocation, reverse DNS).
 
+---
 
-A lightweight standalone Python tool for quick IP enrichment and threat triage.
+## 🚀 Features
 
+- Reverse DNS lookup (PTR)
+- Geolocation (country, city)
+- Organization and ASN lookup
+- AbuseIPDB reputation scoring
+- JSON output option for automation
 
+---
 
-\## Features
+## 📦 Requirements
 
+- Python 3
+- Internet access
+- AbuseIPDB API key (optional)
 
+---
 
-\- Reverse DNS lookup
+## ⚙️ Setup
 
-\- Geolocation lookup
+Clone the repo:
 
-\- Organization / ASN lookup
+```bash
+git clone https://github.com/mccoy6038/soc-triage-tool.git
+cd soc-triage-tool
 
-\- AbuseIPDB enrichment
-
-
-
-\## Requirements
-
-
-
-\- Python 3
-
-\- AbuseIPDB API key (optional, for `--abuse`)
-
-
-
-\## Usage
-
-
-
-```powershell
-
-py ip\_lookup\_standalone.py 8.8.8.8
-
-py ip\_lookup\_standalone.py 8.8.8.8 --abuse
-
-py ip\_lookup\_standalone.py 8.8.8.8 --json
-
+$env:ABUSEIPDB_KEY="your_api_key"
