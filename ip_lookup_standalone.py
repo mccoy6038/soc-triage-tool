@@ -13,6 +13,12 @@ def http_get_json(url: str, headers: dict | None = None) -> dict:
     with urllib.request.urlopen(req, timeout=20) as resp:
         return json.loads(resp.read().decode("utf-8"))
 
+def normalize_indicator(indicator: str) -> tuple[str, str]:
+    if "://" in indicator:
+        parsed = urllib.parse.urlparse(indicator)
+        host = parsed.hostname or indicator
+        return "url", host
+    return "ip", indicator
 
 def reverse_dns(ip: str) -> str | None:
     try:
@@ -21,6 +27,8 @@ def reverse_dns(ip: str) -> str | None:
     except Exception:
         return None
 
+def resolve_hostname(host: str) -> str:
+    return socket.gethostbyname(host)
 
 def geo_lookup(ip: str) -> dict:
     return http_get_json(f"https://ipwho.is/{urllib.parse.quote(ip)}")
@@ -42,7 +50,10 @@ def main() -> int:
     parser.add_argument("--abuse", action="store_true")
     args = parser.parse_args()
 
-    ip = args.indicator
+    kind, ip = normalize_indicator(args.indicator)
+    if kind == "url":
+        ip = resolve_hostname(ip)    
+
     result = {
         "ip": ip,
         "geo": geo_lookup(ip),

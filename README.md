@@ -11,6 +11,7 @@ Lightweight Python tool for rapid SOC triage and IP enrichment using threat inte
 - Organization and ASN lookup
 - AbuseIPDB reputation scoring
 - JSON output option for automation
+- URL/hostname normalization and resolution to IP
 
 ---
 
@@ -36,6 +37,7 @@ $env:ABUSEIPDB_KEY="your_api_key"
 py ip_lookup_standalone.py 8.8.8.8
 py ip_lookup_standalone.py 8.8.8.8 --abuse
 py ip_lookup_standalone.py 8.8.8.8 --json
+py ip_lookup_standalone.py https://example.com --abuse
 
 ## Example Output
 IP: 8.8.8.8
